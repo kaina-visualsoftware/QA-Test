@@ -1,0 +1,56 @@
+# ROBOT FRAMEWORK
+output.xml
+log.html
+report.html
+
+# Pasta de resultados (se usar -d results)
+results/
+reports/
+
+# Logs temporários
+*.log
+*.tmp
+
+
+# SIKULI (JAVA LOGS)
+Sikuli_java_stdout_*
+Sikuli_java_stderr_*
+
+# PYTHON
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# VS Code
+.vscode/
+
+# PyCharm / IntelliJ
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Mac
+.DS_Store
+
+# ARQUIVOS SENSÍVEIS
+# Configs locais (opcional)
+.env
+*.env
+config/local.yaml
+
+# BACKUPS / LIXO
+*.bak
+*.old
+*.swp
+
+# SIKULI TEMP (se gerar)
+*.sikuli/*.pyc
+*.sikuli/**pycache**/
