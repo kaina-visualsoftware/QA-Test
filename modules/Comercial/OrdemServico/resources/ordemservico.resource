@@ -21,3 +21,18 @@ Abrir Tela de Inclusão de OS
     Carregar elementos da tela
     Wait Until Screen Contain    Adicionar.png    10
     Click     Adicionar.png
+    Wait Until Screen Contain   FrmInclusaoOs.png    20
+
+Adicionar Vendedor
+    [Documentation]   Adiciona um vendedor na OS
+    #Carregar elementos da tela
+    #Wait Until Screen Contain   AddVendedor.png    5
+    #Click    bntAddVendedor.png
+    Informar Valor   2
+    
+
+Adicionar Cliente
+    [Documentation]   Adiciona um cliente na OS
+    Carregar elementos da tela
+    Wait Until Screen Contain   AddCliente.png    5
+    Click    bntAddCliente.png

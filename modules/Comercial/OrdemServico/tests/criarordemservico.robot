@@ -7,3 +7,8 @@ Resource    ${CURDIR}/../resources/ordemservico.resource
 Criar Ordem de Serviço
     [Documentation]   Teste para criar uma ordem de serviço
     Abrir Tela de Inclusão de OS
+    Adicionar Vendedor
+    Adicionar Cliente
+
+Clicar em cliente
+    Adicionar Cliente

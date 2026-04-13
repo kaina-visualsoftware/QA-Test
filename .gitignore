@@ -15,6 +15,11 @@ reports/
 # SIKULI (JAVA LOGS)
 Sikuli_java_stdout_*
 Sikuli_java_stderr_*
+**/sikuli_captured
+
+sikuli_captured/*
+
+
 
 # PYTHON
 **pycache**/

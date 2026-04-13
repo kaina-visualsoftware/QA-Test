@@ -8,7 +8,7 @@ Library           Process
 Avançar Campos
     [Arguments]    ${vezes}
     FOR    ${i}    IN RANGE    ${vezes}
-        Press Key    TAB
+        Press Special Key    TAB
         Sleep    1s
     END
 
@@ -26,10 +26,3 @@ Pressionar Atalho
     Press Special Key    ${atalho}
     Sleep    1s
 
-Inserir Produto
-    [Arguments]    ${produto}
-    Pressionar Atalho     F4
-    Sleep    1s
-    Informar Valor    ${produto}
-    Pressionar Enter
-    
