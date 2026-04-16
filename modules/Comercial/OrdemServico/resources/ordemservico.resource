@@ -1,38 +1,42 @@
-*** Settings ***
+﻿*** Settings ***
 Documentation     Palavras-chave para os testes de OS
 
 Library           SikuliLibrary
+Library           Process
+Library           ImageHorizonLibrary
 Resource          ${EXECDIR}/common/keywords_comuns.resource
 
 
 *** Keywords ***
-Carregar elementos da tela
-    [Documentation]   Carrega os elementos da tela para serem utilizados nos testes
-    Add Image Path    ${CURDIR}/../images
-
-Abrir Ordem de Serviço
-    [Documentation]   Abre a tela de Ordem de Serviço
-    Pressionar Atalho     F3
+Abrir Tela de Listagem de OS
+    [Documentation]   Abre a tela de lista de Ordens de Serviço
+    Carregar elementos da tela
+    Pressionar Atalho    F3
     Sleep    1s
+    Log    Tela de listagem de OS aberta
 
 Abrir Tela de Inclusão de OS
-    [Documentation]   Abre a tela de inclusão de OS
-    Abrir Ordem de Serviço
-    Carregar elementos da tela
-    Wait Until Screen Contain    Adicionar.png    10
-    Click     Adicionar.png
-    Wait Until Screen Contain   FrmInclusaoOs.png    20
+    [Documentation]   Abre a tela de inclusão de Ordem de Serviço
+    Abrir Tela de Listagem de OS
+    Avançar Campos    2
+    Pressionar Enter
+    Sleep    1s
+    Log    Tela de inclusão de OS aberta
 
-Adicionar Vendedor
-    [Documentation]   Adiciona um vendedor na OS
-    #Carregar elementos da tela
-    #Wait Until Screen Contain   AddVendedor.png    5
-    #Click    bntAddVendedor.png
-    Informar Valor   2
-    
-
-Adicionar Cliente
-    [Documentation]   Adiciona um cliente na OS
+Se: Tela de Indicacao Existir Então Fechar
+    [Documentation]   Fecha a indicação se ela existir
     Carregar elementos da tela
-    Wait Until Screen Contain   AddCliente.png    5
-    Click    bntAddCliente.png
+    ${indicacao}=    Run Keyword And Return Status    Wait Until Screen Contain    FrmIndicacao.png    10
+    IF    ${indicacao}
+        Pressionar Atalho    ESC
+    END
+    Sleep    1s
+
+
+Fechar Tela de OS
+    [Documentation]   Fecha a tela de OS
+    Pressionar Atalho    ESC
+    Se: Tela de Aviso de Cancelamento de OS Existir Então Fechar
+    Se: Tela de Senha de Supervisor para Cancelamento de OS Existir Então Fechar
+    Pressionar Atalho    ESC
+    Sleep    1s
