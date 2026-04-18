@@ -7,24 +7,26 @@ Library           Process
 *** Variables ***
 ${MYCOMMERCE_PATH}      C:\\Visual Software\\MyCommerce\\myCommerce.exe
 ${MYCOMMERCE_IMAGE}     mycommerce.png
-${BANCO_ATUAL}          6513
+${MYCOMMERCE_TELA_PRINCIPAL}    tela_principal.png
+${BANCO_ATUAL}          ${EMPTY}    #6513    
 
 *** Keywords ***
 Abrir MyCommerce
     [Arguments]    ${caminho}=${MYCOMMERCE_PATH}
     [Documentation]    Abre o aplicativo MyCommerce usando o Executar do Windows
     Pressionar Combinacao Teclas    Key.WIN    Key.r
-    Sleep    1s
+    Sleep    0.5s
     Informar Valor    ${caminho}
     Pressionar Enter
     Carregar elementos da tela
-    Wait Until Screen Contain    ${MYCOMMERCE_IMAGE}    15
+    Wait Until Screen Contain    ${MYCOMMERCE_IMAGE}    30
+    
 
 Deslogar e Fechar MyCommerce
     [Documentation]    Encerra o MyCommerce quando é necessário trocar de banco
     Pressionar Combinacao Teclas    Key.CTRL    Key.l
     Sleep    2s
-    Pressionar Combinacao Teclas    Key.ALT    Key.F4
+    Pressionar Atalho    ESC
     Sleep    3s
 
 Preencher Empresa
@@ -73,8 +75,11 @@ Abrir MyCommerce e Logar
     Abrir MyCommerce
     Configurar Banco de Dados    ${banco}
     Logar    ${usuario}    ${senha}    ${preencher_empresa}
+    Carregar elementos da tela
+    Wait Until Screen Contain    MycommerceHome.png    30
     Set Global Variable    ${BANCO_ATUAL}    ${banco}
-    Sleep    1s
+    Sleep    10s
+
 
 Verificar e Configurar Banco
     [Arguments]    ${novo_banco}    ${preencher_empresa}=TRUE
@@ -129,6 +134,7 @@ Usar as setas
 Carregar elementos da tela
     [Documentation]   Carrega os elementos da tela para serem utilizados nos testes
     Add Image Path    ${CURDIR}/../images
+    Sleep    0.5s
 
 Se: Tela de Creditos Existir Então Fechar
     [Documentation]   Fecha a tela de créditos se ela existir
@@ -144,10 +150,20 @@ Se: Tela de Aviso Sem CPF Cadastrado Existir Então Fechar
     Carregar elementos da tela
     ${aviso}=    Run Keyword And Return Status    Wait Until Screen Contain    FrmAvisoSemCPFCadastrado.png    10
     IF    ${aviso}
-        Pressionar Atalho    ESC
+        Se: Qualquer Tela de Aviso Existir Então Apertar em Não
     END
     Sleep    1s
 
+Se: Tela de Aviso Sem CNPJ Cadastrado Existir Então Fechar
+    [Documentation]   Fecha a tela de aviso de CNPJ não cadastrado se ela existir
+    Carregar elementos da tela
+    ${aviso}=    Run Keyword And Return Status    Wait Until Screen Contain    FrmAvisoSemCNPJCadastrado.png    10
+    IF    ${aviso}
+        Se: Qualquer Tela de Aviso Existir Então Apertar em Não
+    END
+    Sleep    1s
+    
+    
 Se: Tela de Aviso de Cancelamento de OS Existir Então Fechar
     [Documentation]   Fecha a tela de aviso de cancelamento de OS se ela existir
     Carregar elementos da tela
@@ -169,14 +185,28 @@ Se: Tela de Senha de Supervisor para Cancelamento de OS Existir Então Fechar
     END
     Sleep    1s
 
+Se: Qualquer Tela de Aviso Existir Então Apertar em Não
+    [Documentation]   Fecha qualquer tela de aviso genérica se ela existir
+    Carregar elementos da tela
+    ${aviso_generico}=    Run Keyword And Return Status    Wait Until Screen Contain    FrmAvisoNAO.png    10
+    IF    ${aviso_generico}
+        SikuliLibrary.Click    FrmAvisoNAO.png
+    END
+    Sleep    1s
+
 Adicionar Vendedor
     [Arguments]    ${vendedor}=1
     [Documentation]   Preenche o vendedor na ordem de serviço
     Informar Valor    ${vendedor}
     Avançar Campos    1
-    Usar as setas    DOWN
-    Avançar Campos    1
     Log    Vendedor adicionado
+    Sleep    1s
+
+Selecionar Tabela
+    [Documentation]   Selecionar tabela de preço
+    Pressionar Atalho    HOME
+    Avançar Campos    1
+    Log    Tabela selecionada
     Sleep    1s
 
 Adicionar Cliente

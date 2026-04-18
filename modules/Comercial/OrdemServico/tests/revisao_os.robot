@@ -14,18 +14,45 @@ Test Teardown    Fechar Tela de OS
     Abrir Tela de Inclusão de OS
     Se: Tela de Indicacao Existir Então Fechar
     Adicionar Vendedor    2
+    Selecionar Tabela
     Adicionar Cliente    05402266964
     Se: Tela de Creditos Existir Então Fechar
     Log    Teste 1-579 concluído com sucesso
 
-1-579 - Selecionar cliente na venda com CPF inexistente no cadastro
-    [Tags]    1-579
+1-580 - Selecionar cliente na venda com CPF inexistente no cadastro
+    [Tags]    1-580
     [Setup]    Verificar e Configurar Banco    6513
     [Documentation]   Teste para criar uma ordem de serviço
-    Log    Iniciando teste: 1-579 - Selecionar cliente na venda com CPF existente no cadastro
+    Log    Iniciando teste: 1-580 - Selecionar cliente na venda com CPF inexistente no cadastro
     Abrir Tela de Inclusão de OS
     Se: Tela de Indicacao Existir Então Fechar
     Adicionar Vendedor    2
+    Selecionar Tabela
     Adicionar Cliente    65011982246
     Se: Tela de Aviso Sem CPF Cadastrado Existir Então Fechar
-    Log    Teste 1-579 concluído com sucesso
+    Log    Teste 1-580 concluído com sucesso
+
+1-581 - Selecionar cliente na venda com CNPJ existente no cadastro.
+    [Tags]    1-581
+    [Setup]    Verificar e Configurar Banco    6513
+    [Documentation]   Teste para criar uma ordem de serviço
+    Log    Iniciando teste: 1-606 - Cadastrar cliente ao informar CPF
+    Abrir Tela de Inclusão de OS
+    Se: Tela de Indicacao Existir Então Fechar
+    Adicionar Vendedor    2
+    Selecionar Tabela
+    Adicionar Cliente    80399488000100
+    Log    Teste 1-606 concluído com sucesso
+
+1-582 - Selecionar cliente na venda com CNPJ inexistente no cadastro.
+    [Tags]    1-582
+    [Setup]    Verificar e Configurar Banco    6513
+    [Documentation]   Teste para criar uma ordem de serviço
+    Log    Iniciando teste: 1-606 - Cadastrar cliente ao informar CPF
+    Abrir Tela de Inclusão de OS
+    Se: Tela de Indicacao Existir Então Fechar
+    Adicionar Vendedor    2
+    Selecionar Tabela
+    Adicionar Cliente    42367927000104
+    Se: Tela de Aviso Sem CNPJ Cadastrado Existir Então Fechar
+    Log    Teste 1-606 concluído com sucesso
